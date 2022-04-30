@@ -1,0 +1,15 @@
+---
+title: "**Apple Stock Valuation**"
+subtitle: "R for finance"
+author: "Cheryl Isabella"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    theme: cosmo
+    df_print: paged
+---
+<br>
+
+work in progress; view ASV page for completed R analysis and valuation. 
