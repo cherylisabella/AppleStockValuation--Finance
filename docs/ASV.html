@@ -348,11 +348,19 @@ div.tocify {
 </div>
 
 
+<<<<<<< HEAD
 <p><strong>Assumptions:</strong></p>
 <ul>
 <li>Assume Apple uses a cost of equity, i.e. 𝑟𝑒 , of 5.50 percent and an
 after-tax weighted average cost of capital of 9.50 percent, i.e.
 𝑟𝑤𝑎𝑐𝑐.</li>
+=======
+<p><strong>Assumptions: </strong></p>
+<ul>
+<li>Assume Apple uses a cost of equity, i.e. 𝑟𝑒 , of 5.50 percent and an
+after-tax weighted average cost of capital of 9.50 percent,
+i.e. 𝑟𝑤𝑎𝑐𝑐.</li>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <li>The expected return on new investments is 4.00 percent.</li>
 </ul>
 <div id="data" class="section level2">
@@ -404,15 +412,23 @@ div_forecast</code></pre>
 <div id="c-long-term-growth-rate" class="section level3">
 <h3>c) Long-term Growth Rate</h3>
 <p><span class="math display">\[g = (1-PayoutRatio) *
+<<<<<<< HEAD
 ReturnOnNewInvestment\]</span> <br></p>
+=======
+ReturnOnNewInvestment\]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>new_g &lt;- (1-payout) * exp_ret
 new_g</code></pre>
 <pre><code>## [1] 0.032664</code></pre>
 </div>
 <div id="d-stock-price-year-five" class="section level3">
 <h3>d) Stock Price Year Five</h3>
+<<<<<<< HEAD
 <p><span class="math display">\[P_5 = \frac{Div_6}{r_e-g} \]</span>
 <br></p>
+=======
+<p><span class="math display">\[P_5 = \frac{Div_6}{r_e-g} \]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>r &lt;- 0.055
 Div6 &lt;- div_forecast[6,2] * (1 + new_g)
 
@@ -425,7 +441,11 @@ round(P5, 2)</code></pre>
 <p><span class="math display">\[P_0 = \frac{Div_1}{1+r_e} +
 \frac{Div_2}{(1+r_e)^2} + \frac{Div_3}{(1+r_e)^3} +
 \frac{Div_4}{(1+r_e)^4} + \frac{Div_5}{(1+r_e)^5} +
+<<<<<<< HEAD
 \frac{P_5}{(1+r_e)^5} \]</span> <br></p>
+=======
+\frac{P_5}{(1+r_e)^5} \]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>P0_DDM &lt;- (div_forecast[2,2] / 1+r) + (div_forecast[3,2] / (1+r)^2) + (div_forecast[4,2] / (1+r)^3) + (div_forecast[5,2] / (1+r)^4) + (div_forecast[6,2] / (1+r)^5) + (P5 / (1+r)^5)
 round(P0_DDM, 2)</code></pre>
 <pre><code>## [1] 74.27</code></pre>
@@ -495,7 +515,11 @@ forecast_dcf</code></pre>
 <div id="e-free-cash-flow-forecast" class="section level3">
 <h3>e) Free Cash Flow Forecast</h3>
 <p><span class="math display">\[FCF_t = EBIT * (1-𝜏_c) + Depreciation -
+<<<<<<< HEAD
 CAPEX - (NWC_t - NWC_{t-1}) \]</span> <br></p>
+=======
+CAPEX - (NWC_t - NWC_{t-1}) \]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>FCF_forecast &lt;- mutate(forecast_dcf, CAPEX = PPE_fc - lag(PPE_fc),
          NWC_change = NWC_fc - lag(NWC_fc),
          FCF = EBIT_fc * (1- ratios$avg_tax_rate) + depreciation_fc - CAPEX - NWC_change)
@@ -509,7 +533,11 @@ FCF_forecast[-1,c(1,10)]</code></pre>
 <div id="f-horizon-enterprise-value-year-seven" class="section level3">
 <h3>f) Horizon Enterprise Value Year Seven</h3>
 <p><span class="math display">\[V_7 = \frac{FCF_8}{r_{wacc}-g} =
+<<<<<<< HEAD
 \frac{FCF_7*(1+g)}{r_{wacc}-g}\]</span> <br> <br></p>
+=======
+\frac{FCF_7*(1+g)}{r_{wacc}-g}\]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>r_wacc &lt;- 0.095
 FCF7 &lt;- as.numeric(filter(FCF_forecast, year == &quot;7&quot;) %&gt;% select(FCF))
 
@@ -522,8 +550,13 @@ V7</code></pre>
 <p><span class="math display">\[V_0 = \frac{FCF_1}{1+r_{wacc}} +
 \frac{FCF_2}{(1+r_{wacc})^2} + \frac{FCF_3}{(1+r_{wacc})^3} +
 \frac{FCF_4}{(1+r_{wacc})^4} + \frac{FCF_5}{(1+r_{wacc})^5} +
+<<<<<<< HEAD
 \frac{FCF_6}{(1+r_{wacc})^6} + \frac{FCF_7+V_7}{(1+r_{wacc})^7}\]</span>
 <br></p>
+=======
+\frac{FCF_6}{(1+r_{wacc})^6} +
+\frac{FCF_7+V_7}{(1+r_{wacc})^7}\]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>V0 &lt;- FCF_forecast[2,10]/(1+r_wacc) + FCF_forecast[3,10]/(1+r_wacc)^2 + FCF_forecast[4,10]/(1+r_wacc)^3 + FCF_forecast[5,10]/(1+r_wacc)^4 + FCF_forecast[6,10]/(1+r_wacc)^5 + FCF_forecast[7,10]/(1+r_wacc)^6 + (FCF_forecast[8,10] + V7)/(1+r_wacc)^7
 V0</code></pre>
 <pre><code>## [1] 2.026078e+12</code></pre>
@@ -531,7 +564,11 @@ V0</code></pre>
 <div id="h-current-stock-price" class="section level3">
 <h3>h) Current Stock Price</h3>
 <p><span class="math display">\[P_0 = \frac{EnterpriseValue_0 + Cash_0 -
+<<<<<<< HEAD
 Debt_0}{Shares Outstanding}\]</span> <br></p>
+=======
+Debt_0}{Shares Outstanding}\]</span></p>
+>>>>>>> 6b3a9421cce3b899e125e9b73d774109ca020ff9
 <pre class="r"><code>cash2020 &lt;- balance[1,6]
 debt2020 &lt;- balance[1,5]
 
