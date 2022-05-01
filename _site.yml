@@ -1,0 +1,13 @@
+name: "asv"
+output_dir: "docs"
+output:
+    html_document:
+      theme: cosmo
+navbar:
+    title: "Apple Stock Valuation"
+    left:
+    - text: "Home"
+      href: index.html
+    - text: "ASV"
+      href: ASV.html
+
